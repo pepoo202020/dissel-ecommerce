@@ -10,7 +10,7 @@ export default function MainLayout({
   return (
     <div className="w-full h-full  flex flex-col items-start justify-start relative max-w-screen-xl mx-auto">
       <MainHeader />
-      <main className="flex-1 w-full h-full bg-blue-100">{children}</main>
+      <main className="flex-1 w-full h-ful">{children}</main>
       <MainFooter />
       <FloatingActionButtons />
     </div>
