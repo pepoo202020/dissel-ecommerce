@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  role      String    @default("USER")
+  wishlist  Wishlist?
+  cart      Cart?
+  orders    Order[]
+  createdAt DateTime  @default(now())
+}
+
+model Product {
+  id          String     @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  stock       Int
+  discount    Float?
+  mainImage   String
+  images      String[]
+  categoryId  String
+  category    Category   @relation(fields: [categoryId], references: [id])
+  featured    Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  CartItem    CartItem[]
+  Wishlist    Wishlist?  @relation(fields: [wishlistId], references: [id])
+  wishlistId  String?
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  products Product[]
+}
+
+model Cart {
+  id     String     @id @default(cuid())
+  userId String     @unique
+  user   User       @relation(fields: [userId], references: [id])
+  items  CartItem[]
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  quantity  Int
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  cartId    String
+  cart      Cart    @relation(fields: [cartId], references: [id])
+}
+
+model Wishlist {
+  id       String    @id @default(cuid())
+  userId   String    @unique
+  user     User      @relation(fields: [userId], references: [id])
+  products Product[]
+}
+
+model Order {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  total     Float
+  createdAt DateTime @default(now())
+}
