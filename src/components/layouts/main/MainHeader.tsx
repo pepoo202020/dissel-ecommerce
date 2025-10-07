@@ -25,7 +25,7 @@ const links: LinkItem[] = [
 const MainHeader = () => {
   const pathname = usePathname();
   return (
-    <header className="h-20 w-full flex items-center justify-between">
+    <header className="h-20 w-full flex items-center justify-between mb-5 mt-2">
       {/* logo */}
       <div
         className={cn(

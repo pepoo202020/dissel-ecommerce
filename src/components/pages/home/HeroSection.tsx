@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <div className="flex items-start justify-start w-full h-full gap-5">
+    <section className="flex items-start justify-start w-full h-full gap-5">
       <div className="w-1/3 h-full bg-[#E0E0E0] flex items-center justify-center rounded-xl overflow-hidden relative">
         <Image
           src="/images/heroSection/image-1.png"
@@ -59,7 +59,7 @@ const HeroSection = () => {
           height={568}
         />
       </div>
-    </div>
+    </section>
   );
 };
 
